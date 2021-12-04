@@ -6,9 +6,7 @@ import com.example.quatro_to.model.Floor;
 import com.example.quatro_to.service.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,5 +32,12 @@ public class FloorController {
             floorDtos.add(floorDto);
         }
         return ResponseEntity.ok(floorDtos);
+    }
+
+    @PostMapping
+    public ResponseEntity<FloorDto> save(@RequestBody FloorDto floorDto){
+        Floor floor = Floor.builder().number(floorDto.getNumber()).build();
+        Floor storedFloor  = floorService.save(floor);
+        return ResponseEntity.ok(floorConverter.toFloorDto(storedFloor));
     }
 }
