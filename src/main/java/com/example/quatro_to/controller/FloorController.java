@@ -5,9 +5,12 @@ import com.example.quatro_to.dto.FloorDto;
 import com.example.quatro_to.model.Floor;
 import com.example.quatro_to.service.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,9 +38,15 @@ public class FloorController {
     }
 
     @PostMapping
-    public ResponseEntity<FloorDto> save(@RequestBody FloorDto floorDto){
+    public ResponseEntity<FloorDto> save(@RequestBody @Valid FloorDto floorDto){
         Floor floor = Floor.builder().number(floorDto.getNumber()).build();
         Floor storedFloor  = floorService.save(floor);
         return ResponseEntity.ok(floorConverter.toFloorDto(storedFloor));
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable Long id){
+        floorService.delete(id);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }
