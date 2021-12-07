@@ -47,6 +47,6 @@ public class FloorController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable Long id){
         floorService.delete(id);
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        return ResponseEntity.ok().build();
     }
 }
