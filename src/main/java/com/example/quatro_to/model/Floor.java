@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +24,7 @@ public class Floor {
     @NotNull
     @Column(unique = true,nullable = false)
     private Integer number;
+
 
 
 }

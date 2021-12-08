@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface FloorRepository extends JpaRepository<Floor,Long> {
 
-    Optional<Floor> findByNumber(Integer number);
+    Optional<Floor> findByNumber(Long number);
 }

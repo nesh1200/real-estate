@@ -35,7 +35,7 @@ public class FloorServiceImpl implements FloorService {
     }
 
     @Override
-    public Floor findByNumber(Integer number) {
+    public Floor findByNumber(Long number) {
         return floorRepository.findByNumber(number)
                 .orElseThrow(()-> new ResourceNotFoundException(String.format("Floor with this number %d doesnt exists", number)));
     }
@@ -58,6 +58,7 @@ public class FloorServiceImpl implements FloorService {
     @Override
     public void delete(Long id) {
 
+      // floorRepository.delete();
     }
 
     @Override
