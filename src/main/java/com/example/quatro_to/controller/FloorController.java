@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/floors")
@@ -28,6 +29,7 @@ public class FloorController {
 
     @GetMapping
     public ResponseEntity<Set<FloorDto>> findAll() {
+        /*
         Set<FloorDto> floorDtos = new HashSet<>();
         Set<Floor> floors = floorService.findAll();
         for (Floor floor: floors){
@@ -35,6 +37,11 @@ public class FloorController {
             floorDtos.add(floorDto);
         }
         return ResponseEntity.ok(floorDtos);
+        */
+        return ResponseEntity.ok(floorService.findAll()
+                .stream()
+                .map(floorConverter::toFloorDto)
+                .collect(Collectors.toSet()));
     }
 
     @PostMapping

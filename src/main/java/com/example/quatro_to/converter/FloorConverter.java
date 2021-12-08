@@ -10,7 +10,7 @@ public class FloorConverter {
     public FloorDto toFloorDto(Floor floor){
         return FloorDto.builder()
                 .number(floor.getNumber())
-                .id(floor.getId())
+                //.id(floor.getId())
                 .build();
     }
 

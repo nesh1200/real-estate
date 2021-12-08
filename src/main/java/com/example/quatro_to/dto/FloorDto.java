@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class FloorDto {
 
-    private Long id;
+    //private Long id;
 
     @Min(value = -3, message = "Value shpould be NOT under -3")
     @Max(value = 164, message = "Value should be not over 164")
