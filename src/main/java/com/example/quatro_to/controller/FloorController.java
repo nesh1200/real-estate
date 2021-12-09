@@ -7,6 +7,7 @@ import com.example.quatro_to.service.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,21 @@ public class FloorController {
                 .collect(Collectors.toSet()));
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<FloorDto> findById(@PathVariable Long id){
+        return ResponseEntity.ok(
+                floorConverter.toFloorDto(
+                        floorService.findById(id)
+                )
+        );
+    }
+
+    @GetMapping(value = "/{number}")
+    public ResponseEntity<FloorDto> findByNumber(@PathVariable Integer number){
+        return ResponseEntity.ok(floorConverter.toFloorDto(floorService.findByNumber(number)));
+    }
+
+
     @PostMapping
     public ResponseEntity<FloorDto> save(@RequestBody @Valid FloorDto floorDto){
         Floor floor = Floor.builder().number(floorDto.getNumber()).build();
@@ -56,7 +72,5 @@ public class FloorController {
         floorService.delete(id);
         return ResponseEntity.ok().build();
     }
-
-    //Add some comments
- 
+    
 }
