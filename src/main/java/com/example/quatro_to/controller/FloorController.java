@@ -5,14 +5,11 @@ import com.example.quatro_to.dto.FloorDto;
 import com.example.quatro_to.model.Floor;
 import com.example.quatro_to.service.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -67,10 +64,18 @@ public class FloorController {
         return ResponseEntity.ok(floorConverter.toFloorDto(storedFloor));
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<FloorDto> update(@RequestBody @Valid FloorDto floorDto,
+                                           @PathVariable Long id){
+        Floor floor = floorConverter.toFloor(floorDto);
+        Floor updatedFloor = floorService.update(floor,id);
+        return ResponseEntity.ok(floorConverter.toFloorDto(updatedFloor));
+    }
+
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable Long id){
         floorService.delete(id);
         return ResponseEntity.ok().build();
     }
-    
+
 }

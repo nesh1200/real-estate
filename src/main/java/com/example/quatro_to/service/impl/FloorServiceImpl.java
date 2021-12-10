@@ -25,6 +25,7 @@ public class FloorServiceImpl implements FloorService {
 
     @Override
     public Floor save(Floor floor) {
+
         try {
             return floorRepository.save(floor);
         }
@@ -50,6 +51,7 @@ public class FloorServiceImpl implements FloorService {
         Floor foundFloor = findById(id);
         Floor updateFloor = Floor.builder()
                 .id(foundFloor.getId())
+                .number(floor.getNumber())
                 .build();
         return save(updateFloor);
     }
