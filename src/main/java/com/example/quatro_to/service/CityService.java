@@ -1,7 +1,6 @@
 package com.example.quatro_to.service;
 
 import com.example.quatro_to.model.City;
-import com.example.quatro_to.model.Neighborhood;
 
 import java.util.Set;
 

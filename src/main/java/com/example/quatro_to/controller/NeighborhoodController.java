@@ -29,7 +29,8 @@ public class NeighborhoodController {
     @GetMapping
     public ResponseEntity<Set<NeighborhoodDto>> findAll(){
         return ResponseEntity.ok(
-                neighborhoodService.findAll().stream()
+                neighborhoodService.findAll()
+                        .stream()
                         .map(neighborhoodConverter::toNeighborhoodDto)
                         .collect(Collectors.toSet())
         );
@@ -42,7 +43,7 @@ public class NeighborhoodController {
         return ResponseEntity.ok(neighborhoodConverter.toNeighborhoodDto(updatedNeighborhood));
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/id/{id}")
     public ResponseEntity<NeighborhoodDto> findById(@PathVariable Long id){
         Neighborhood neighborhood = neighborhoodService.findById(id);
         return ResponseEntity.ok(neighborhoodConverter.toNeighborhoodDto(neighborhood));
@@ -62,5 +63,12 @@ public class NeighborhoodController {
     public ResponseEntity<HttpStatus> delete(@PathVariable Long id){
         neighborhoodService.delete(id);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping
+    public ResponseEntity<NeighborhoodDto> save(@RequestBody @Valid NeighborhoodDto neighborhoodDto){
+        Neighborhood neighborhood = neighborhoodConverter.toNeighborhood(neighborhoodDto);
+        Neighborhood savedNeighborhood = neighborhoodService.save(neighborhood);
+        return ResponseEntity.ok(neighborhoodConverter.toNeighborhoodDto(savedNeighborhood));
     }
 }

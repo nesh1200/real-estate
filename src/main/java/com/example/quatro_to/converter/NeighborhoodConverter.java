@@ -10,12 +10,14 @@ public class NeighborhoodConverter {
     public NeighborhoodDto toNeighborhoodDto(Neighborhood neighborhood){
         return NeighborhoodDto.builder()
                 .name(neighborhood.getName())
+                .id(neighborhood.getId())
                 .build();
     }
 
     public Neighborhood toNeighborhood(NeighborhoodDto neighborhoodDto){
         return Neighborhood.builder()
                 .name(neighborhoodDto.getName())
+                .id(neighborhoodDto.getId())
                 .build();
     }
 }

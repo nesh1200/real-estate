@@ -31,8 +31,8 @@ public class City {
     @ManyToMany
     @JoinTable(
         name = "cities_neighborhoods",
-            joinColumns = @JoinColumn(name = "neighborhood_id"),
-            inverseJoinColumns = @JoinColumn(name = "city_id")
+            joinColumns = @JoinColumn(name = "city_id"),
+            inverseJoinColumns = @JoinColumn(name = "neighborhood_id")
     )
     private Set<Neighborhood> neighborhoods;
 }

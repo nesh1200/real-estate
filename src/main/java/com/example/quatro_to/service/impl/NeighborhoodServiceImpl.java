@@ -28,18 +28,18 @@ public class NeighborhoodServiceImpl implements NeighborhoodService {
         try {
             return neighborhoodRepository.save(neighborhood);
         }catch(DataIntegrityViolationException e){
-                throw new DuplicateFormatFlagsException(String.format("Floor with this number %s already exists", neighborhood.getName()));
+                throw new DuplicateFormatFlagsException(String.format("Neighborhood with this name %s already exists", neighborhood.getName()));
             }
         }
 
     @Override
     public Neighborhood findByName(String name) {
-        return neighborhoodRepository.findByName(name).orElseThrow(()-> new ResourceNotFoundException(String.format("Floor with this number %d doesnt exists", name)));
+        return neighborhoodRepository.findByName(name).orElseThrow(()-> new ResourceNotFoundException(String.format("Neighborhood with this name %s doesnt exists", name)));
     }
 
     @Override
     public Neighborhood findById(Long id) {
-        return neighborhoodRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(String.format("Floor with this number %d doesnt exists", id)));
+        return neighborhoodRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(String.format("Neighborhood with this number %d doesnt exists", id)));
     }
 
     @Override

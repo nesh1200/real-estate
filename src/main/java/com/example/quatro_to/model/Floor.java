@@ -21,8 +21,12 @@ public class Floor {
     private Long id;
 
     @NotNull
-    @Column(unique = true,nullable = false)
+    @Column(unique = false,nullable = false)
     private Integer number;
 
+
+    @ManyToOne
+    @JoinColumn(name = "building_id")
+    private Building building;
 
 }

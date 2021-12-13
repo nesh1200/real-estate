@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -16,6 +17,7 @@ import java.util.Set;
 @Table(name = "neighborhoods")
 @Builder
 public class Neighborhood {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,4 +29,7 @@ public class Neighborhood {
 
     @ManyToMany(mappedBy = "neighborhoods")
     private Set<City> cities;
+
+    @OneToMany(mappedBy = "neighborhood")
+    private List<Building> buildings;
 }

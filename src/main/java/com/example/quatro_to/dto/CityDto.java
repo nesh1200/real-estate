@@ -5,12 +5,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Builder
-public class NeighborhoodDto {
+@Getter
+public class CityDto {
 
     private Long id;
     private String name;
+    private Long population;
+    private Set<Long> neighborhoodIds;
 }

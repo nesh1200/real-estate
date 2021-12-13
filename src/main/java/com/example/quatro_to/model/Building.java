@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,4 +32,10 @@ public class Building {
     @Column(name = "yard", nullable = false)
     private boolean has_yard;
 
+    @ManyToOne
+    @JoinColumn(name = "neighborhood_id", nullable = false)
+    private Neighborhood neighborhood;
+
+    @OneToMany(mappedBy = "building")
+    private List<Floor> floors;
 }
