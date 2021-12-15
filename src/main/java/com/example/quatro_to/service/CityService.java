@@ -11,5 +11,6 @@ public interface CityService {
     City update(City city, Long id);
     void delete(Long id);
     Set<City> findAll();
+    void detachCityNeighborhood(Long cityId, Set<Long> neighborhoodIds);
 
 }

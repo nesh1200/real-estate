@@ -1,5 +1,6 @@
 package com.example.quatro_to.service.impl;
 
+import com.example.quatro_to.exception.DuplicateRecordException;
 import com.example.quatro_to.exception.ResourceNotFoundException;
 import com.example.quatro_to.model.Floor;
 import com.example.quatro_to.repository.FloorRepository;
@@ -8,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.DuplicateFormatFlagsException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -29,8 +28,8 @@ public class FloorServiceImpl implements FloorService {
         try {
             return floorRepository.save(floor);
         }
-        catch(DataIntegrityViolationException e){
-            throw new DuplicateFormatFlagsException(String.format("Floor with this number %d already exists", floor.getNumber()));
+        catch(DataIntegrityViolationException exception){
+            throw new DuplicateRecordException(String.format("Floor with this number %d already exists", floor.getNumber()));
         }
 
     }

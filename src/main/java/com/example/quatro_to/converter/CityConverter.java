@@ -12,11 +12,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class CityConverter {
-    private final NeighborhoodService neighborhoodService;
-
-    public CityConverter(NeighborhoodService neighborhoodService) {
-        this.neighborhoodService = neighborhoodService;
-    }
 
     public City toCity(CityDto cityDto){
 
@@ -28,18 +23,6 @@ public class CityConverter {
                         .map((neighborhoodId)-> Neighborhood.builder()
                                 .id(neighborhoodId)
                                 .build()).collect(Collectors.toSet()))
-                .build();
-    }
-
-    public City toCityTest(CityDto cityDto){
-
-        return City.builder()
-                .name(cityDto.getName())
-                .population(cityDto.getPopulation())
-                .neighborhoods(cityDto.getNeighborhoodIds()
-                        .stream()
-                        .map(neighborhoodService::findById)
-                        .collect(Collectors.toSet()))
                 .build();
     }
 

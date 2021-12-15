@@ -27,7 +27,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City save(City city){
-        /*
+
         Set<Neighborhood> neighborhoods = new HashSet<>();
         for(Neighborhood neighborhood: city.getNeighborhoods()){
             Neighborhood foundNeighborhood = neighborhoodService.findById(neighborhood.getId());
@@ -39,10 +39,6 @@ public class CityServiceImpl implements CityService {
                        .population(city.getPopulation())
                         .neighborhoods(neighborhoods)
                         .build());
-
-         */
-
-            return cityRepository.save(city);
     }
 
     @Override
@@ -77,4 +73,12 @@ public class CityServiceImpl implements CityService {
     public Set<City> findAll() {
         return new HashSet<>(cityRepository.findAll());
     }
+
+    @Override
+    public void detachCityNeighborhood(Long cityId, Set<Long> neighborhoodIds) {
+        City foundCity = cityRepository.getById(cityId);
+        foundCity.getNeighborhoods().removeIf(neighborhood -> neighborhoodIds.contains(neighborhood.getId()));
+        cityRepository.save(foundCity);
+    }
+
 }

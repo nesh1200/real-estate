@@ -1,6 +1,7 @@
 package com.example.quatro_to.controller;
 
 import com.example.quatro_to.converter.CityConverter;
+import com.example.quatro_to.dto.CityDetachNeighborhoodDto;
 import com.example.quatro_to.dto.CityDto;
 import com.example.quatro_to.model.City;
 import com.example.quatro_to.service.CityService;
@@ -30,7 +31,7 @@ public class CityController {
 
     @PostMapping
     public ResponseEntity<CityDto> save(@RequestBody @Valid CityDto cityDto){
-        City city  = cityConverter.toCityTest(cityDto);
+        City city  = cityConverter.toCity(cityDto);
         City savedCity = cityService.save(city);
         return  ResponseEntity.ok(cityConverter.toCityDto(savedCity));
     }
@@ -61,9 +62,15 @@ public class CityController {
     @PutMapping("/{id}")
     public ResponseEntity<CityDto> update(@RequestBody @Valid CityDto cityDto, @PathVariable Long id){
 
-        City convertedCity  = cityConverter.toCityTest(cityDto);
+        City convertedCity  = cityConverter.toCity(cityDto);
         City updateCity = cityService.update(convertedCity,id);
         return ResponseEntity.ok(cityConverter.toCityDto(updateCity));
+    }
+
+    @PutMapping
+    public ResponseEntity<HttpStatus> detach(@RequestBody CityDetachNeighborhoodDto cityDetachNeighborhoodDto){
+        cityService.detachCityNeighborhood(cityDetachNeighborhoodDto.getCityId(), cityDetachNeighborhoodDto.getNeighborhoodsIds());
+        return ResponseEntity.ok().build();
     }
 
 }
