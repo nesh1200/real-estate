@@ -59,7 +59,7 @@ public class FloorController {
 
     @PostMapping
     public ResponseEntity<FloorDto> save(@RequestBody @Valid FloorDto floorDto){
-        Floor floor = Floor.builder().number(floorDto.getNumber()).build();
+        Floor floor = floorConverter.toFloor(floorDto);
         Floor storedFloor  = floorService.save(floor);
         return ResponseEntity.ok(floorConverter.toFloorDto(storedFloor));
     }
