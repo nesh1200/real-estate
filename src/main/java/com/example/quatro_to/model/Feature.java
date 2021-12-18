@@ -8,14 +8,15 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
-@Table(name = "estate_features")
+@Table(name = "features")
 @Builder
-public class EstateFeature {
+public class Feature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +27,7 @@ public class EstateFeature {
     @Column(nullable = false)
     private String feature;
 
-    //@ManyToMany(mappedBy = "estateFeatures")
+    @ManyToMany(mappedBy = "features")
+    private Set<Estate> estates;
 
 }

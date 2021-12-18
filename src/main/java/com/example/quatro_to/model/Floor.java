@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,9 +25,7 @@ public class Floor {
     @Column(unique = false,nullable = false)
     private Integer number;
 
-
-    @ManyToOne
-    @JoinColumn(name = "building_id")
-    private Building building;
+    @OneToMany(mappedBy = "floor")
+    private Set<Estate> estates;
 
 }

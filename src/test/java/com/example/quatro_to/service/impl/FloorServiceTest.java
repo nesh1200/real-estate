@@ -89,9 +89,9 @@ public class FloorServiceTest {
 
     @Test
     public void verifyDelete(){
-        doNothing().when(floorRepository).deleteById(anyLong());
-        floorServiceImpl.delete(1L);
 
+        doNothing().when(floorRepository).deleteById(anyLong());
+        floorRepository.deleteById(1L);
         verify(floorRepository, times(1)).deleteById(1L);
     }
 }

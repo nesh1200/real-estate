@@ -69,7 +69,7 @@ public class FloorServiceFuncTest {
         Floor floor = Floor.builder().number(44).build();
         Floor expected = floorService.save(floor);
 
-        Optional<Floor> actualFloor =floorRepository.findById(expected.getId());
+        Optional<Floor> actualFloor = floorRepository.findById(expected.getId());
 
         Assert.assertTrue( actualFloor.isPresent());
     }

@@ -4,6 +4,7 @@ import com.example.quatro_to.converter.FloorConverter;
 import com.example.quatro_to.dto.FloorDto;
 import com.example.quatro_to.model.Floor;
 import com.example.quatro_to.service.FloorService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,13 @@ import java.util.stream.Collectors;
 public class FloorController {
     private final FloorService floorService;
     private final FloorConverter floorConverter;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public FloorController(FloorService floorService, FloorConverter floorConverter) {
+    public FloorController(FloorService floorService, FloorConverter floorConverter, ModelMapper modelMapper) {
         this.floorService = floorService;
         this.floorConverter = floorConverter;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -42,7 +45,7 @@ public class FloorController {
                 .collect(Collectors.toSet()));
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/id/{id}")
     public ResponseEntity<FloorDto> findById(@PathVariable Long id){
         return ResponseEntity.ok(
                 floorConverter.toFloorDto(

@@ -29,7 +29,4 @@ public class Neighborhood {
 
     @ManyToMany(mappedBy = "neighborhoods")
     private Set<City> cities;
-
-    @OneToMany(mappedBy = "neighborhood")
-    private List<Building> buildings;
 }
