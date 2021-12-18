@@ -35,4 +35,7 @@ public class City {
             inverseJoinColumns = @JoinColumn(name = "neighborhood_id")
     )
     private Set<Neighborhood> neighborhoods;
+
+    @OneToMany(mappedBy = "city")
+    private Set<Estate> estates;
 }

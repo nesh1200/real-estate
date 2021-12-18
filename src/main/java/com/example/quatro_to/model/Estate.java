@@ -27,6 +27,9 @@ public class Estate {
     )
     private Floor floor;
 
+    @Embedded
+    private Quadrature quadrature;
+
     @ManyToMany
     @JoinTable(
             name = "estate_features",
@@ -34,6 +37,11 @@ public class Estate {
             inverseJoinColumns = @JoinColumn(name = "feature_id",referencedColumnName = "id")
     )
     private Set<Feature> features;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id",
+    foreignKey = @ForeignKey(name = "fk_city_id"))
+    private City city;
 
     @Column
     private String description;

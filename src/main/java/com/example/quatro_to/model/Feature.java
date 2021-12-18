@@ -25,7 +25,7 @@ public class Feature {
     @Length(min = 3,max = 30,message = "Length should be between 3 and 30")
     @NotNull
     @Column(nullable = false)
-    private String feature;
+    private String name;
 
     @ManyToMany(mappedBy = "features")
     private Set<Estate> estates;
